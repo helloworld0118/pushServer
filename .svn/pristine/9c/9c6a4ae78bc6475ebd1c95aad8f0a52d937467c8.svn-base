@@ -1,0 +1,9 @@
+package com.wanda3.service.dao;
+
+public class LogDaoUtil {
+
+	public static void  addErrorLog(){
+		
+	}
+	
+}

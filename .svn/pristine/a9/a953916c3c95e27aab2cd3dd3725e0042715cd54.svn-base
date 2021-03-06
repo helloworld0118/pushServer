@@ -1,0 +1,16 @@
+package com.wanda3.socket.callback;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.wanda3.socket.entity.ExceptionCallBackBean;
+
+public class AndroidSendMessageExceptionCallBack extends SendMessageExceptionCallBack {
+
+	private List<ExceptionCallBackBean> android;
+	public AndroidSendMessageExceptionCallBack(){
+		android = new ArrayList<ExceptionCallBackBean>();
+		setAndroid(android);
+	}
+	
+}

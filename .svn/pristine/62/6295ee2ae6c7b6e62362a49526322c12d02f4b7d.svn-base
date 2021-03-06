@@ -1,0 +1,10 @@
+package com.wanda3.socket.listener;
+
+import com.wanda3.socket.entity.Header;
+
+
+public interface MessageListener {
+
+	public void receiveMessage(Header header,String[] to);
+	
+}

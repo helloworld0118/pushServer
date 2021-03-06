@@ -1,0 +1,76 @@
+package com.wanda3.socket.callback;
+
+import java.sql.SQLException;
+import java.util.List;
+
+import com.wanda3.service.pool.PoolManager;
+import com.wanda3.socket.entity.ExceptionCallBackBean;
+
+/**
+ * 消息发送异常回调再次发送
+ * @author SongXiangYing
+ *
+ */
+public class SendMessageExceptionCallBack {
+
+	private List<ExceptionCallBackBean> android;
+	private List<ExceptionCallBackBean> ios ;
+	
+	public void addAndroidExceptionMessage(ExceptionCallBackBean backBean){
+		android.add(backBean);
+	}
+	public void addIOSExceptionMessage(ExceptionCallBackBean backBean){
+		ios.add(backBean);
+	}
+	public void removeAndroidExceptionMessage(ExceptionCallBackBean backBean){
+		android.remove(backBean);
+	}
+
+	public void removeIOSExceptionMessage(ExceptionCallBackBean backBean){
+		ios.remove(backBean);
+	}
+	public void updateAndroidExceptionMessage(ExceptionCallBackBean backBean){
+		android.remove(backBean);
+		int count = backBean.getCount()+1;
+		if(count>=4){
+			 String sql = "call add_push_message_state_by_user('"+backBean.getHeader().getVid()+"',"+backBean.getHeader().getMessageid()+",',',"+1+",'1')";
+			 try {
+				PoolManager.getCallableStatement(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else{
+			backBean.setCount(count);
+			addAndroidExceptionMessage(backBean);
+		}
+	}
+
+	public void updateIOSExceptionMessage(ExceptionCallBackBean backBean){
+		ios.remove(backBean);
+		int count = backBean.getCount()+1;
+		if(count>=4){
+			 String sql = "call add_push_message_state_by_user('"+backBean.getHeader().getVid()+"',"+backBean.getHeader().getMessageid()+",',',"+1+",'1')";
+			 try {
+				PoolManager.getCallableStatement(sql);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}else{
+			backBean.setCount(count);
+			addIOSExceptionMessage(backBean);
+		}
+	}
+	public List<ExceptionCallBackBean> getAndroid() {
+		return android;
+	}
+	public void setAndroid(List<ExceptionCallBackBean> android) {
+		this.android = android;
+	}
+	public List<ExceptionCallBackBean> getIos() {
+		return ios;
+	}
+	public void setIos(List<ExceptionCallBackBean> ios) {
+		this.ios = ios;
+	}
+	
+}

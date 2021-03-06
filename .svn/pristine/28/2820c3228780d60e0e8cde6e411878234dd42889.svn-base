@@ -1,0 +1,6 @@
+datasource.type=mysql
+datasource.driverClassName=com.mysql.jdbc.Driver
+datasource.url=jdbc\:mysql\://10.199.202.70\:3306/wdAppServer?useUnicode\=true&characterEncoding\=UTF-8
+datasource.username=root
+datasource.password=root
+

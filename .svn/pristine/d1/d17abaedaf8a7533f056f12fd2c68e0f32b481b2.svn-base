@@ -1,0 +1,7 @@
+iosPushPort=2195
+iosPushHost=gateway.sandbox.push.apple.com
+certificatePath=/home/admin/rainbowpush.p12
+iosPushPassword=123456
+localhostip=127.0.0.1
+queue=2025
+
